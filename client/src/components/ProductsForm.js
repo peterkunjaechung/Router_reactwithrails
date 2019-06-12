@@ -1,6 +1,6 @@
-import React from 'react';
-import { Form, Header, } from "semantic-ui-react";
+import React from "react";
 import axios from "axios";
+import { Form, Header, } from "semantic-ui-react";
 
 class ProductsForm extends React.Component {
   defaultValues = { name: "", price: "", description: "", department: "", };
@@ -8,66 +8,60 @@ class ProductsForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const product = { ...this.state, };
-    axios.post("/api/products", product)
+    axios.post("/api/products", { ...this.state, })
       .then( res => {
-          this.props.history.push("/products");
+        this.props.history.push("/products");
       })
-    // TODO: make api POST request
     this.setState({ ...this.defaultValues, });
-  }
+  };
 
-  handleChange = (e) => {
-    const { target: { name, value, } } = e;
-    this.setState({ [name]: value, });
-  }
+  handleChange = (e, { name, value }) => this.setState({ [name]: value, });
 
   render() {
-    const { name, price, description, department, } = this.state;
-
     return (
       <div>
         <Header as="h1">New Product</Header>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
-            <Form.Input
+            <Form.Input 
               label="Name"
               name="name"
               placeholder="Name"
-              value={name}
+              value={this.state.name}
               onChange={this.handleChange}
               required
             />
-            <Form.Input
+            <Form.Input 
               label="Description"
               name="description"
               placeholder="Description"
-              value={description}
+              value={this.state.description}
               onChange={this.handleChange}
             />
           </Form.Group>
           <Form.Group widths="equal">
-            <Form.Input
+            <Form.Input 
               label="Department"
               name="department"
               placeholder="Department"
-              value={department}
+              value={this.state.department}
               onChange={this.handleChange}
             />
-            <Form.Input
+            <Form.Input 
               label="Price"
               name="price"
               placeholder="Price"
               type="number"
-              value={price}
+              value={this.state.price}
               onChange={this.handleChange}
             />
           </Form.Group>
           <Form.Button color="blue">Submit</Form.Button>
         </Form>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default ProductsForm;
+

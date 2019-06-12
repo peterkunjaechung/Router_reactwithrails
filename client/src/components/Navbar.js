@@ -20,6 +20,6 @@ const Navbar = () => (
       </Menu.Item>
     </Link>
   </Menu>
-)
+);
 
 export default Navbar;

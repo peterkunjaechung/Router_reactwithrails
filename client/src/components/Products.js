@@ -1,7 +1,7 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { Button, Card, Header, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
+import { Button, Card, Header, } from "semantic-ui-react";
 
 const Products = (props) => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ const Products = (props) => {
     if (products.length <= 0)
       return <Header as="h2">No Products</Header>
     return products.map( product => (
-      <Card>
+      <Card key={product.id}>
         <Card.Content>
           <Card.Header>{product.name}</Card.Header>
           <Card.Meta>{product.department}</Card.Meta>
@@ -26,10 +26,10 @@ const Products = (props) => {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Button as={Link} to={'/products/${product.id}'} color='blue'>
-          View
+          <Button as={Link} to={`/products/${product.id}`} color="blue">
+            View
           </Button>
-          </Card.Content>
+        </Card.Content>
       </Card>
     ));
   };
@@ -38,8 +38,8 @@ const Products = (props) => {
     <div>
       <Header as="h1">Products</Header>
       <br />
-      <Button as={Link} color="blue" to="/products/new">
-      Add Product
+      <Button as={Link} to="/products/new" color="blue">
+        Add Product
       </Button>
       <br />
       <br />
